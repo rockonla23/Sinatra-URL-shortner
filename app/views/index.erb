@@ -1,0 +1,30 @@
+<div class="container">
+  <h1>Welcome to Get Shorty Link!</h1>
+  <p>Do You Feel Lucky Punk?</p>
+
+<form action = "/" method="POST">
+    Shortener URL: <input type="text" name="url"><br>
+    <input type="submit">
+  </form>
+</div>
+
+<% if @shorten_url.errors.nil? %>
+  <p><%= @shorten_url.url%></p>
+<%elsif @shorten_url.errors.empty?%>
+  <p><a href = <%="#{request.base_url}/#{@shorten_url.shorten_link}"%>></p>
+  <p><%= @shorten_url.shorten_link%></p></a>
+
+<%else%>
+  <p><%= @shorten_url.errors.full_messages %></p>
+<%end%>
+
+<% if !@shorten_url.errors.nil? %>
+ <% @shorten_url_all.each do |x|%>
+  <p><%= x.url%></p>Shorten URL:
+  <a href = <%="#{request.base_url}/#{x.shorten_link}"%>><p><%= x.shorten_link%></a></p> <%= x.click_count%>
+  <% end %>
+<% end %>
+
+
+
+
